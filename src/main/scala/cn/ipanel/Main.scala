@@ -1,6 +1,7 @@
 package cn.ipanel
 
 import org.apache.spark.sql.SparkSession
+import org.slf4j.LoggerFactory
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -9,9 +10,11 @@ object Main {
       .master("local")
       .getOrCreate()
 
-    // 设置spark日志级别
-    spark.sparkContext.setLogLevel("WARN")
-
+    val logger = LoggerFactory.getLogger("simword")
+    logger.info("")
+    logger.info("**************************************************************")
+    logger.info("**                       训练Word2Vec并预测                 **")
+    logger.info("**************************************************************")
     // 训练文件路径
     val fileName: String = args(0)
     // 参与训练的csv文件列名
@@ -21,29 +24,26 @@ object Main {
     // 被预测词文件存放路径
     val predictWordFile: String = args(3)
 
-    println("fileName: " + fileName)
-    println("colName: " + colName)
-    println("modelPath: " + modelPath)
-    println("predictWordFile: " + predictWordFile)
+    logger.info("fileName: " + fileName)
+    logger.info("colName: " + colName)
+    logger.info("modelPath: " + modelPath)
+    logger.info("predictWordFile: " + predictWordFile)
 
-    println("==================== 读取csv文件 ==========================")
+
     val readFile = new ReadFile
     val csvFile = readFile.readCSV(fileName, colName, spark)
 
-    println("==================== ansj分词 ==========================")
+
     val wordSeg = new WordSegment
     val seg = wordSeg.ansjSeg(csvFile, spark)
 
-    println("==================== 训练word2vec模型 ==========================")
-    println("训练时间和语料库规模以及向量空间维度有关，会比较长。。。。。。")
+
     val trainModel = new TrainModel
     val predWordModel = trainModel.train(seg, modelPath)
 
 
-    println("==================== 相似词预测 ==========================")
     val similarWord = new SimilarWord()
     similarWord.printSimilarWd(spark, modelPath, readFile, predictWordFile)
-
 
 
   }

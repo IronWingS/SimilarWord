@@ -1,6 +1,7 @@
 package cn.ipanel
 
 import org.apache.spark.sql.SparkSession
+import org.slf4j.LoggerFactory
 
 object PredictSimWd {
   def main(args: Array[String]): Unit = {
@@ -9,17 +10,17 @@ object PredictSimWd {
       .master("local")
       .getOrCreate()
 
-    // 设置spark日志级别
-    spark.sparkContext.setLogLevel("WARN")
+    val logger = LoggerFactory.getLogger("simword")
 
     // w2v模型存放路径
     val modelPath = args(2)
     // 要查找的相似词
     val preWordFilePath = args(3)
-
-    println("==================== 相似词预测 ==========================")
+    logger.info("")
+    logger.info("**************************************************************")
+    logger.info("**                       预测给定词的相似词                 **")
+    logger.info("**************************************************************")
     val similarWord = new SimilarWord()
     similarWord.printSimilarWd(spark, modelPath, new ReadFile, preWordFilePath)
-    println("Done!")
   }
 }

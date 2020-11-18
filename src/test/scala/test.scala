@@ -47,4 +47,25 @@ class test {
   }
 
 
+  @Test
+  def logTest() = {
+    import org.apache.log4j.LogManager
+    import org.apache.log4j.Logger
+    import org.apache.log4j.LogManager
+
+    val logger = LogManager.getLogger(classOf[test].getName)
+    logger.error("Did it again!");
+
+    logger.info("这是info级信息");
+
+    logger.debug("这是debug级信息");
+
+    logger.warn("这是warn级信息");
+
+    logger.fatal("严重错误");
+
+    logger.trace("exit");
+    logger.error("hello")
+  }
+
 }
