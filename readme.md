@@ -1,9 +1,8 @@
-训练新模型，执行train_pre.sh，输出日志为train_pre.log
+训练新模型，执行train_pre.sh
 
+用已经训练好的模型预测其他词，执行predict.sh
 
-
-用已经训练好的模型预测其他词，执行predict.sh，输出日志为predict.log
-
+输出日志为logs/similarwd.log
 
 
 配置文件configuration.properties中的文件路径都是hdfs路径，训练前需要将相关的文件上传到配置文件中指定的路径下。
