@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory
 object Main {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
-      .appName("hadoopFileTest")
-      .master("local")
+      .appName("trainpre")
+//      .master("local")
       .getOrCreate()
 
     val logger = LoggerFactory.getLogger("trainpredict")

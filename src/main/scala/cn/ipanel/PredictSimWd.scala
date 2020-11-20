@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory
 object PredictSimWd {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
-      .appName("hadoopFileTest")
-      .master("local")
+      .appName("predict")
+//      .master("local")
       .getOrCreate()
 
     val logger = LoggerFactory.getLogger("predict")
