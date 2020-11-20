@@ -10,7 +10,7 @@ object PredictSimWd {
       .master("local")
       .getOrCreate()
 
-    val logger = LoggerFactory.getLogger("simword")
+    val logger = LoggerFactory.getLogger("predict")
 
     // w2v模型存放路径
     val modelPath = args(2)
@@ -21,6 +21,6 @@ object PredictSimWd {
     logger.info("**                       预测给定词的相似词                 **")
     logger.info("**************************************************************")
     val similarWord = new SimilarWord()
-    similarWord.printSimilarWd(spark, modelPath, new ReadFile, preWordFilePath)
+    similarWord.printSimilarWd(spark, modelPath, new ReadFile, preWordFilePath, logger)
   }
 }

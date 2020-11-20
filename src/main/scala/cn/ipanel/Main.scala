@@ -10,7 +10,7 @@ object Main {
       .master("local")
       .getOrCreate()
 
-    val logger = LoggerFactory.getLogger("simword")
+    val logger = LoggerFactory.getLogger("trainpredict")
     logger.info("")
     logger.info("**************************************************************")
     logger.info("**                       训练Word2Vec并预测                 **")
@@ -31,19 +31,19 @@ object Main {
 
 
     val readFile = new ReadFile
-    val csvFile = readFile.readCSV(fileName, colName, spark)
+    val csvFile = readFile.readCSV(fileName, colName, spark, logger)
 
 
     val wordSeg = new WordSegment
-    val seg = wordSeg.ansjSeg(csvFile, spark)
+    val seg = wordSeg.ansjSeg(csvFile, spark, logger)
 
 
     val trainModel = new TrainModel
-    val predWordModel = trainModel.train(seg, modelPath)
+    val predWordModel = trainModel.train(seg, modelPath, logger)
 
 
     val similarWord = new SimilarWord()
-    similarWord.printSimilarWd(spark, modelPath, readFile, predictWordFile)
+    similarWord.printSimilarWd(spark, modelPath, readFile, predictWordFile, logger)
 
 
   }

@@ -2,16 +2,15 @@ package cn.ipanel
 
 import org.apache.spark.ml.feature.Word2VecModel
 import org.apache.spark.sql.SparkSession
-import org.slf4j.LoggerFactory
+import org.slf4j.{Logger, LoggerFactory}
 
 class SimilarWord {
-  def printSimilarWd(spark: SparkSession, modelPath: String, readFile: ReadFile, preWordFilePath: String): Unit = {
+  def printSimilarWd(spark: SparkSession, modelPath: String, readFile: ReadFile, preWordFilePath: String,logger: Logger): Unit = {
 
-    val logger = LoggerFactory.getLogger("simword")
     logger.info("==================== 相似词预测 ==========================")
     // 读取被预测词文件，并转换为Array
     import spark.implicits._
-    val preWordArr = readFile.readTXT(preWordFilePath, spark).map(_.toString()).collect()
+    val preWordArr = readFile.readTXT(preWordFilePath, spark, logger).map(_.toString()).collect()
     // 加载训练好的w2v模型
     val model = Word2VecModel.load(modelPath)
     // 替换被预测词Array的非法字符，遍历数组并使用训练好的模型对其进行预测

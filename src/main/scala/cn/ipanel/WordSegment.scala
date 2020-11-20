@@ -3,11 +3,10 @@ package cn.ipanel
 import org.ansj.recognition.impl.StopRecognition
 import org.ansj.splitWord.analysis.DicAnalysis
 import org.apache.spark.sql.{DataFrame, SparkSession}
-import org.slf4j.LoggerFactory
+import org.slf4j.{Logger, LoggerFactory}
 
 class WordSegment {
-  def ansjSeg(cleanFileDF:DataFrame, spark:SparkSession): DataFrame = {
-    val logger = LoggerFactory.getLogger("simword")
+  def ansjSeg(cleanFileDF:DataFrame, spark:SparkSession,logger: Logger): DataFrame = {
     logger.info("==================== ansj分词 ==========================")
 
     val stop = new StopRecognition()
