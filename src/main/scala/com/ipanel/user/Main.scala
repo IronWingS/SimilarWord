@@ -34,6 +34,7 @@ object Main {
         // 总共观看了多少次
         val totalCount = userLogDF.groupBy("user_id").count()
 
+
         // 看了多少天
         val value1 = userLogDF.dropDuplicates("day").groupBy("user_id").count()
 
