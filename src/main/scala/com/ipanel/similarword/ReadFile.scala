@@ -1,4 +1,4 @@
-package cn.ipanel
+package com.ipanel.similarword
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.slf4j.{Logger, LoggerFactory}

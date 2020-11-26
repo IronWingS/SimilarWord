@@ -1,4 +1,4 @@
-package cn.ipanel
+package com.ipanel.similarword
 
 import org.ansj.recognition.impl.StopRecognition
 import org.ansj.splitWord.analysis.DicAnalysis

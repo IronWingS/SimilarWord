@@ -1,4 +1,4 @@
-package cn.ipanel
+package com.ipanel.similarword
 
 import org.apache.spark.ml.feature.Word2VecModel
 import org.apache.spark.sql.SparkSession
